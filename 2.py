@@ -99,35 +99,31 @@ if __name__ == "__main__":
 # Overall space complexity: O(n + n + n + m), which simplifies to O(n + m).
 
 """
-Huffman Coding is a widely used data compression algorithm that is capable of encoding and decoding data in a lossless manner. It was developed by David A. Huffman in 1952. The main idea behind Huffman coding is to assign shorter codes to more frequent characters and longer codes to less frequent characters, reducing the average length of the encoded data. Huffman coding is commonly used in file compression formats like ZIP, as well as in data transmission protocols.
+**Huffman Coding** is a widely used data compression algorithm that is capable of encoding and decoding data in a lossless manner. It was developed by David A. Huffman in 1952. The main idea behind Huffman coding is to assign shorter codes to more frequent characters and longer codes to less frequent characters, reducing the average length of the encoded data. Huffman coding is commonly used in file compression formats like ZIP, as well as in data transmission protocols.
 
 Here's a step-by-step explanation of how Huffman coding works for encoding and decoding:
 
-Encoding:
+**Encoding:**
+1. **Frequency Analysis:** In the encoding process, the first step is to analyze the input data to determine the frequency of each character (or symbol) that needs to be encoded. The more frequent a character, the shorter its Huffman code will be.
 
-Frequency Analysis: In the encoding process, the first step is to analyze the input data to determine the frequency of each character (or symbol) that needs to be encoded. The more frequent a character, the shorter its Huffman code will be.
+2. **Build Huffman Tree:** Next, a Huffman tree (also known as a Huffman encoding tree) is constructed. This is a binary tree where each leaf node represents a character and its frequency, and internal nodes represent the sum of the frequencies of their children. The tree is built by repeatedly merging the two nodes with the lowest frequencies, creating a new internal node as their parent, until there is only one node left, which becomes the root of the tree.
 
-Build Huffman Tree: Next, a Huffman tree (also known as a Huffman encoding tree) is constructed. This is a binary tree where each leaf node represents a character and its frequency, and internal nodes represent the sum of the frequencies of their children. The tree is built by repeatedly merging the two nodes with the lowest frequencies, creating a new internal node as their parent, until there is only one node left, which becomes the root of the tree.
+3. **Assign Codes:** To create Huffman codes, you traverse the Huffman tree from the root to each leaf node. When you move left in the tree, you append a '0' to the code, and when you move right, you append a '1'. The resulting codes for each character are unique and variable in length.
 
-Assign Codes: To create Huffman codes, you traverse the Huffman tree from the root to each leaf node. When you move left in the tree, you append a '0' to the code, and when you move right, you append a '1'. The resulting codes for each character are unique and variable in length.
+4. **Encode Data:** Finally, you encode the input data by replacing each character with its corresponding Huffman code. The encoded data is typically a binary string, where the Huffman codes are concatenated to represent the original data.
 
-Encode Data: Finally, you encode the input data by replacing each character with its corresponding Huffman code. The encoded data is typically a binary string, where the Huffman codes are concatenated to represent the original data.
+**Decoding:**
+1. **Huffman Tree:** To decode the data, you need the same Huffman tree that was used for encoding. It's crucial to have the original tree structure to map the Huffman codes back to their respective characters.
 
-Decoding:
+2. **Decode Data:** Starting at the root of the Huffman tree, you read the encoded data bit by bit. When you encounter a '0', you move left in the tree, and when you encounter a '1', you move right. You continue this process until you reach a leaf node, which represents a character. That character is the decoded output. You then start over at the root to decode the next character in the input data.
 
-Huffman Tree: To decode the data, you need the same Huffman tree that was used for encoding. It's crucial to have the original tree structure to map the Huffman codes back to their respective characters.
+**Advantages of Huffman Coding:**
+- Huffman codes are variable-length and prefix-free, meaning no code is the prefix of another, making decoding unambiguous.
+- It provides an efficient way to compress data, particularly when the input has variable symbol frequencies.
 
-Decode Data: Starting at the root of the Huffman tree, you read the encoded data bit by bit. When you encounter a '0', you move left in the tree, and when you encounter a '1', you move right. You continue this process until you reach a leaf node, which represents a character. That character is the decoded output. You then start over at the root to decode the next character in the input data.
-
-Advantages of Huffman Coding:
-
-Huffman codes are variable-length and prefix-free, meaning no code is the prefix of another, making decoding unambiguous.
-It provides an efficient way to compress data, particularly when the input has variable symbol frequencies.
-
-Limitations of Huffman Coding:
-
-Huffman encoding requires transmitting the tree structure alongside the encoded data, which can add overhead.
-It may not be the most efficient compression method for all types of data. Other algorithms, like Lempel-Ziv-Welch (LZW), are better for certain data patterns.
+**Limitations of Huffman Coding:**
+- Huffman encoding requires transmitting the tree structure alongside the encoded data, which can add overhead.
+- It may not be the most efficient compression method for all types of data. Other algorithms, like Lempel-Ziv-Welch (LZW), are better for certain data patterns.
 
 Huffman coding is a fundamental concept in data compression and forms the basis for many modern compression techniques. It's widely used in applications where efficient data storage and transmission are essential, such as in file compression, image compression, and data communication.
 """
