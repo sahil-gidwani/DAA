@@ -87,4 +87,32 @@ Here's a step-by-step explanation of how the Fractional Knapsack Problem works:
    The total value obtained after filling the knapsack with items (either partially or completely) is the maximum achievable value under the given constraints.
 
 Fractional Knapsack is a greedy algorithm because, at each step, it selects the item with the highest value-to-weight ratio, making it a locally optimal choice. This approach may or may not lead to a globally optimal solution. It is important to note that Fractional Knapsack is used when fractional parts of items can be included, which is not the case in the traditional (0/1) Knapsack Problem, where items must be taken entirely or not at all.
+
+-------------------------------------
+
+A greedy approach is a problem-solving strategy used in algorithms and optimization, where decisions are made by selecting the best available option at each step, without considering the overall effect of those decisions. The greedy approach aims to find an optimal solution by making a series of locally optimal choices.
+
+Key characteristics of a greedy approach include:
+
+1. Local Optimization: At each step, the greedy algorithm makes a choice that appears to be the best option among those available. This choice is based solely on the current information without any consideration of future consequences.
+
+2. Irreversibility: Greedy choices are generally not revisited or undone in later stages of the algorithm. Once a decision is made, it is considered final.
+
+3. Simplicity: Greedy algorithms are typically straightforward and easy to implement. They involve simple rules or heuristics for making decisions.
+
+4. Efficiency: Greedy algorithms are often efficient in terms of time complexity because they make simple decisions at each step.
+
+5. Suboptimal Solutions: While greedy algorithms provide a solution quickly, they may not always yield the globally optimal solution. In some cases, they can produce solutions that are close to optimal but not guaranteed to be the absolute best.
+
+Examples of Greedy Algorithms:
+
+1. **Greedy Coin Change**: In the problem of making change with the fewest coins, a greedy approach would involve selecting the largest coin denomination at each step. While this usually works, it may not always yield the minimum number of coins for change.
+
+2. **Dijkstra's Shortest Path Algorithm**: Dijkstra's algorithm for finding the shortest path in a weighted graph employs a greedy approach. It repeatedly selects the node with the smallest tentative distance to the starting point and explores its neighbors. This algorithm is guaranteed to work for non-negative edge weights.
+
+3. **Prim's Minimum Spanning Tree**: Prim's algorithm builds a minimum spanning tree by iteratively selecting the edge with the smallest weight that connects a vertex in the tree with a vertex outside the tree. It guarantees a minimum spanning tree for graphs with non-negative edge weights.
+
+4. **Fractional Knapsack**: As explained earlier, the Fractional Knapsack problem is solved using a greedy approach by selecting items with the highest value-to-weight ratios at each step.
+
+It's important to note that while greedy algorithms are useful and efficient for many problems, they may not be appropriate for all situations. The choice of a greedy approach depends on the specific problem and its characteristics. In some cases, additional constraints or more complex algorithms may be required to find the optimal solution. Greedy algorithms are a valuable tool in an algorithm designer's toolkit, but they need to be used judiciously with an understanding of their limitations.
 """
