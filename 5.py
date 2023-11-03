@@ -1,3 +1,6 @@
+first_queen_row = 4
+first_queen_col = 0
+
 def print_board(board):
     n = len(board)
     for i in range(n):
@@ -31,13 +34,17 @@ def solve_n_queens(board, col):
     if col >= n:
         # All queens are placed, return True
         return True
+    
+    if col == first_queen_col:
+        # First queen is placed, move to next column
+        return solve_n_queens(board, col + 1)
 
     # Try placing the queen in each row of the current column
     for i in range(n):
-        if is_safe(board, i, col):
+        if i != first_queen_row and is_safe(board, i, col):
             # Place the queen
             board[i][col] = 1
-
+            
             # Recur to place the rest of the queens
             if solve_n_queens(board, col + 1):
                 return True
@@ -51,12 +58,11 @@ def main():
     n = 8  # Change 'n' to the desired board size
     board = [[0 for _ in range(n)] for _ in range(n)]
 
-    # Place the first queen at (0, 0)
-    first_queen_col = 0
-    board[0][first_queen_col] = 1
+    # Place the first queen at
+    board[first_queen_row][first_queen_col] = 1
 
     # Call the backtracking function to solve the rest of the board
-    if solve_n_queens(board, first_queen_col + 1):
+    if solve_n_queens(board, 0):
         print("Solution exists:")
         print_board(board)
     else:
