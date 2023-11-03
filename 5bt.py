@@ -72,7 +72,7 @@ if __name__ == "__main__":
     main()
 
 # Time Complexity Analysis:
-# The time complexity of this code is mainly determined by the `solve_n_queens` function, which utilizes backtracking to find the solutions. In the worst case, this backtracking algorithm explores all possible positions for the queens, resulting in an exponential time complexity of O(2^n), where 'n' is the size of the chessboard (number of rows and columns).
+# The time complexity of this code is mainly determined by the `solve_n_queens` function, which utilizes backtracking to find the solutions. In the worst case, this backtracking algorithm explores all possible positions for the queens, resulting in time complexity of O(n^2), where 'n' is the size of the chessboard (number of rows and columns).
 #
 # Space Complexity Analysis:
 # The space complexity is determined by the memory required for the chessboard, which is represented as a 2D array (`board`). The space complexity is O(n^2) since we have an 'n x n' chessboard. Additionally, there's some space required for function call stacks during the recursion, but it's generally smaller compared to the chessboard and can be considered negligible for large 'n'.
