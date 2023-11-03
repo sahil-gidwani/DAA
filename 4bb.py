@@ -61,9 +61,9 @@ if __name__ == "__main__":
         print(f"Item {i + 1} (Value: {values[i]}, Weight: {weights[i]})")
 
 # Time Complexity Analysis:
-# - The Branch and Bound method's time complexity is generally exponential in the worst case,
-#   but it often performs much better than brute-force methods due to pruning.
-# - The `get_bound` function helps reduce the number of branches explored and is essential for its performance.
+# The time complexity of the knapsack_branch_and_bound function can be summarized as O(n*log(n)) for the sorting step 
+# in the best case, and potentially exponential (O(2^n)) in the worst case. The actual time taken to solve a specific instance
+# of the problem will depend on the characteristics of the input data and the effectiveness of the pruning.
 
 # Space Complexity Analysis:
 # - The space complexity of this implementation is O(n) due to the recursion stack, where n is the number of items in the knapsack problem.
