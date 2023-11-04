@@ -10,6 +10,7 @@ def knapsack_01(values, weights, capacity):
         for w in range(capacity + 1):
             if i == 0 or w == 0:
                 dp[i][w] = 0
+            # The previous item's weight is less than the current capacity (w) so try to include it
             elif weights[i - 1] <= w:
                 dp[i][w] = max(values[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w])
             else:
