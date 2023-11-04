@@ -3,58 +3,72 @@ class Item:
         self.value = value
         self.weight = weight
         self.index = index
-        self.ratio = value / weight
+        self.ratio = value / weight  # Calculate the value-to-weight ratio for the item
 
 def knapsack_branch_and_bound(values, weights, capacity):
+    # Create a list of items, each represented by the Item class with value, weight, index, and ratio.
     items = [Item(value, weight, i) for i, (value, weight) in enumerate(zip(values, weights))]
-    items.sort(key=lambda x: x.ratio, reverse=True)  # Sort items by value/weight ratio (highest first)
+
+    # Sort the items by value-to-weight ratio in descending order (highest ratio first).
+    items.sort(key=lambda x: x.ratio, reverse=True)
 
     def get_bound(current, remaining_capacity, i):
-        # Calculate the bound for the current node
+        # Calculate the bound for the current node based on the fractional items.
         bound = current
         total_weight = 0
+
         while i < len(items) and total_weight + items[i].weight <= remaining_capacity:
             bound += items[i].value
             total_weight += items[i].weight
             i += 1
+
         if i < len(items):
+            # Include a fraction of the next item to reach the remaining capacity.
             bound += (remaining_capacity - total_weight) * items[i].ratio
+
         return bound
 
     def branch_and_bound(i, current_value, current_weight, selected_items):
+        # Declare 'max_value' and 'result_items' as nonlocal so they can be updated within the function
         nonlocal max_value, result_items
-
+    
+        # If the current weight exceeds the capacity or we have considered all items, return
         if current_weight > capacity or i == len(items):
             return
-
+    
+        # If the current value is greater than the current maximum value, update the maximum value and selected items
         if current_value > max_value:
             max_value = current_value
             result_items = selected_items.copy()
-
+    
+        # Calculate the bound for the current state
         bound = get_bound(current_value, capacity - current_weight, i)
-
+    
+        # If the bound is greater than the current maximum value, consider including the current item
         if bound > max_value:
-            selected_items.append(items[i].index)
+            selected_items.append(items[i].index)  # Include the current item
             branch_and_bound(i + 1, current_value + items[i].value, current_weight + items[i].weight, selected_items)
-            selected_items.pop()
+            selected_items.pop()  # Backtrack by excluding the current item
             branch_and_bound(i + 1, current_value, current_weight, selected_items)
-
+    
+    # Initialize maximum value and selected items
     max_value = 0
     result_items = []
+    
+    # Start the branch and bound algorithm with the first item (index 0) and initial values
     branch_and_bound(0, 0, 0, [])
-
+    
+    # Return the maximum value and the list of selected items as the result
     return max_value, result_items
 
-# Example usage
+
 if __name__ == "__main__":
     values = [10, 40, 30, 50]
     weights = [5, 4, 6, 3]
     capacity = 10
 
-    # Solve the 0-1 Knapsack Problem using Branch and Bound
     max_value, selected_items = knapsack_branch_and_bound(values, weights, capacity)
 
-    # Output the results
     print(f"Maximum value in the knapsack: {max_value}")
     print("Selected items:")
     for i in selected_items:
