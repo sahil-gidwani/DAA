@@ -20,8 +20,7 @@ print(f"Fibonacci({n}) using recursive method: {result}")
 
 # Space Complexity Analysis:
 # Space Complexity: O(n)
-# The recursive approach has a linear space complexity because it uses the function call stack,
-# and in the worst case, there will be n function calls in the stack.
+# The recursive approach has a linear space complexity because it uses the function call stack, and in the worst case, there will be n function calls in the stack.
 
 """
 **Recursion:**
