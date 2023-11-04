@@ -61,7 +61,6 @@ def knapsack_branch_and_bound(values, weights, capacity):
     # Return the maximum value and the list of selected items as the result
     return max_value, result_items
 
-
 if __name__ == "__main__":
     values = [10, 40, 30, 50]
     weights = [5, 4, 6, 3]
