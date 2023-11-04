@@ -18,19 +18,31 @@ def build_huffman_tree(data):
     frequency = defaultdict(int)
     for char in data:
         frequency[char] += 1
+    # for char, freq in frequency.items():
+    #     print(f"Character: {char}, Frequency: {freq}")
 
     # Create a priority queue (min heap) of nodes
     priority_queue = [Node(char, freq) for char, freq in frequency.items()]
+    # print("Priority Queue:")
+    # for node in priority_queue:
+    #     print(f"Character: {node.char}, Frequency: {node.freq}")
+    
     heapq.heapify(priority_queue)
+    # print("\nHeapified Priority Queue:")
+    # for node in priority_queue:
+    #     print(f"Character: {node.char}, Frequency: {node.freq}")
 
     # Build the Huffman tree
     while len(priority_queue) > 1:
         left = heapq.heappop(priority_queue)
         right = heapq.heappop(priority_queue)
+        # print("Left Node - Character:", left.char, "Frequency:", left.freq)
+        # print("Right Node - Character:", right.char, "Frequency:", right.freq)
         parent = Node(None, left.freq + right.freq)
         parent.left, parent.right = left, right
         heapq.heappush(priority_queue, parent)
 
+    # print(f"Character: {priority_queue[0].char}, Frequency: {priority_queue[0].freq}")
     return priority_queue[0]
 
 # Function to encode the data
