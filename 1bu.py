@@ -1,6 +1,6 @@
 # Dynamic Programming Bottom-Up (Tabulation) Approach to Calculate Fibonacci Numbers
 
-def fibonacci_iterative(n):
+def fibonacci_bottom_up(n):
     # Initialize an array to store Fibonacci numbers
     fib = [0, 1]
 
