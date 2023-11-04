@@ -11,6 +11,9 @@ def knapsack_branch_and_bound(values, weights, capacity):
 
     # Sort the items by value-to-weight ratio in descending order (highest ratio first).
     items.sort(key=lambda x: x.ratio, reverse=True)
+    # print("Sorted items:")
+    # for item in items:
+    #     print(f"Item {item.index + 1} - Value: {item.value}, Weight: {item.weight}, Ratio: {item.ratio}")
 
     def get_bound(current, remaining_capacity, i):
         # Calculate the bound for the current node based on the fractional items.
@@ -25,7 +28,7 @@ def knapsack_branch_and_bound(values, weights, capacity):
         if i < len(items):
             # Include a fraction of the next item to reach the remaining capacity.
             bound += (remaining_capacity - total_weight) * items[i].ratio
-
+        
         return bound
 
     def branch_and_bound(i, current_value, current_weight, selected_items):
@@ -34,21 +37,27 @@ def knapsack_branch_and_bound(values, weights, capacity):
     
         # If the current weight exceeds the capacity or we have considered all items, return
         if current_weight > capacity or i == len(items):
+            # print(f"Stopping at node {i}, current_value: {current_value}, current_weight: {current_weight}")
             return
     
         # If the current value is greater than the current maximum value, update the maximum value and selected items
         if current_value > max_value:
             max_value = current_value
             result_items = selected_items.copy()
+        
+        # print(f"Exploring node {i}, current_value: {current_value}, current_weight: {current_weight}")
     
         # Calculate the bound for the current state
         bound = get_bound(current_value, capacity - current_weight, i)
+        # print(f"Bound at node {i}: {bound}")
     
         # If the bound is greater than the current maximum value, consider including the current item
         if bound > max_value:
             selected_items.append(items[i].index)  # Include the current item
+            # print(f"Including item {i + 1} with value {items[i].value} and weight {items[i].weight}")
             branch_and_bound(i + 1, current_value + items[i].value, current_weight + items[i].weight, selected_items)
             selected_items.pop()  # Backtrack by excluding the current item
+            # print(f"Excluding item {i + 1} with value {items[i].value} and weight {items[i].weight}")
             branch_and_bound(i + 1, current_value, current_weight, selected_items)
     
     # Initialize maximum value and selected items
@@ -60,6 +69,7 @@ def knapsack_branch_and_bound(values, weights, capacity):
     
     # Return the maximum value and the list of selected items as the result
     return max_value, result_items
+
 
 if __name__ == "__main__":
     values = [10, 40, 30, 50]
