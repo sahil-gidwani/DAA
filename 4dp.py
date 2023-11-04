@@ -1,20 +1,36 @@
 # Function to solve the 0-1 Knapsack Problem using dynamic programming
 def knapsack_01(values, weights, capacity):
-    n = len(values)
+    n = len(values)  # Number of items available for the knapsack problem
 
     # Initialize a table to store the maximum value for each (item, capacity) combination
+    # dp[i][w] represents the maximum value that can be obtained with the first 'i' items
+    # and a knapsack capacity of 'w'.
     dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
 
     # Populate the table using dynamic programming
-    for i in range(n + 1):
-        for w in range(capacity + 1):
+    for i in range(n + 1):  # Iterate through the available items
+        for w in range(capacity + 1):  # Iterate through knapsack capacities from 0 to the given capacity
+
+            # Base case 1: If there are no items (i == 0) or no remaining capacity (w == 0),
+            # the maximum value is 0 because there are no items to include or no capacity to use.
             if i == 0 or w == 0:
                 dp[i][w] = 0
-            # The previous item's weight is less than the current capacity (w) so try to include it
+
+            # Case 2: If the weight of the current item (weights[i-1]) is less than or equal to
+            # the remaining capacity (w), we have a choice:
+            # 1. Include the current item and add its value (values[i-1]) to the maximum value obtained with
+            #    the remaining capacity (dp[i-1][w-weights[i-1]]).
+            # 2. Exclude the current item and retain the maximum value obtained with the same capacity (dp[i-1][w]).
             elif weights[i - 1] <= w:
                 dp[i][w] = max(values[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w])
+
+            # Case 3: If the weight of the current item (weights[i-1]) is greater than the remaining capacity (w),
+            # we cannot include the item, so we retain the maximum value obtained with the same capacity (dp[i-1][w]).
             else:
                 dp[i][w] = dp[i - 1][w]
+
+    # The final value in dp[n][capacity] represents the maximum value that can be obtained with all items
+    # and the given capacity.
 
     # Find the items included in the optimal solution
     selected_items = []
@@ -27,6 +43,7 @@ def knapsack_01(values, weights, capacity):
 
     selected_items.reverse()
 
+    # Return the maximum value and a list of indices of selected items
     return dp[n][capacity], selected_items
 
 # Example usage
